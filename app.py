@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, abort
+from flask import Flask, abort, redirect, render_template, request
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -22,13 +22,22 @@ def list_all_movies():
 
 @app.get('/movies/new')
 def create_movies_form():
-    return render_template('create_movies_form.html', create_rating_active=True)
+    return render_template('create_movies_form.html')
 
 
 @app.post('/movies')
 def create_movie():
     # TODO: Feature 2
     # After creating the movie in the database, we redirect to the list all movies page
+    movie_title = request.form.get("movie-title")
+    movie_director = request.form.get("movie-director")
+    movie_rating = request.form.get("movie-rating")
+    
+    if movie_title is None or movie_director is None or movie_rating is None:
+        abort(400)
+    
+    movie_repository.create_movie(movie_title, movie_director, movie_rating)
+    
     return redirect('/movies')
 
 
