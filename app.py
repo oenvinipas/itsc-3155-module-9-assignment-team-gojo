@@ -1,8 +1,9 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, abort
 
 from src.repositories.movie_repository import get_movie_repository
 
 app = Flask(__name__)
+app.debug = True
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
@@ -40,7 +41,15 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    movie_repository.create_movie('The Matrix', 'The Wachowskis', 10)
+    movie = movie_repository.get_movie_by_title('The Matrix')
+    if movie:
+        title = movie.title
+        director = movie.director
+        rating = movie.rating
+    else: 
+        abort (404)
+    return render_template('get_single_movie.html', title=title, director=director, rating=rating)
 
 
 @app.get('/movies/<int:movie_id>/edit')
