@@ -34,9 +34,6 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
-    print(type(movie_title))
-    print(type(movie_director))
-    print(type(movie_rating))
     
     if movie_title is None or movie_director is None or movie_rating is None:
         abort(403)
@@ -44,10 +41,6 @@ def create_movie():
     movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
-    # print(movie_repository.get_movie_by_title("Jurassic Park").movie_id)
-    # print(movie_repository.get_movie_by_title("Jurassic Park").title)
-    # print(movie_repository.get_movie_by_title("Jurassic Park").director)
-    # print(movie_repository.get_movie_by_title("Jurassic Park").rating)
     
     return redirect('/movies')
 
