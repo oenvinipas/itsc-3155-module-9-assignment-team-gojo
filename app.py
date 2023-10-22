@@ -42,6 +42,10 @@ def create_movie():
     movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
+    # print(movie_repository.get_movie_by_title("Jurassic Park").movie_id)
+    # print(movie_repository.get_movie_by_title("Jurassic Park").title)
+    # print(movie_repository.get_movie_by_title("Jurassic Park").director)
+    # print(movie_repository.get_movie_by_title("Jurassic Park").rating)
     
     return redirect('/movies')
 
