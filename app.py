@@ -16,7 +16,7 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    return render_template('list_all_movies.html', list_movies_active=True, movie_repository=movie_repository)
 
 
 @app.get('/movies/new')
