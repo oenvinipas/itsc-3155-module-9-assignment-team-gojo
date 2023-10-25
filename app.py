@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, abort, request
+from flask import Flask, abort, redirect, render_template, request
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -32,6 +32,7 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
+    movie_rating = int(movie_rating)
     
     if movie_title is None or movie_director is None or movie_rating is None:
         abort(400)
@@ -43,8 +44,15 @@ def create_movie():
 
 @app.get('/movies/search')
 def search_movies():
-    # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    # TODO: Feature 3 
+    movie_title = request.args.get('movie-title')
+    
+    if movie_title is None:
+        return render_template('search_movies.html', search_active=True)
+
+    movie = movie_repository.get_movie_by_title(movie_title)
+
+    return render_template('search_movies.html', search_active=True, movie=movie)
 
 
 @app.get('/movies/<int:movie_id>')
@@ -76,4 +84,4 @@ def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
 
-# test 
+#test3
