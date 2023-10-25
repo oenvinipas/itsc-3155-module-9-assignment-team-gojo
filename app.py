@@ -50,7 +50,7 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    movie_repository.create_movie('The Matrix', 'The Wachowskis', 10)
+    movie_repository.create_movie('The Matrix', 'The Wachowskis', 3)
     movie = movie_repository.get_movie_by_title('The Matrix')
     if movie:
         title = movie.title
