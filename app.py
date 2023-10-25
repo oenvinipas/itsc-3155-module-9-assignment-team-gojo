@@ -50,16 +50,14 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    movie_repository.create_movie('The Matrix', 'The Wachowskis', 3)
-    movie = movie_repository.get_movie_by_title('The Matrix')
+    movie = movie_repository.get_movie_by_id(int(movie_id)) #unit test this
     if movie:
         title = movie.title
         director = movie.director
         rating = movie.rating
     else: 
         abort (404)
-    return render_template('get_single_movie.html', title=title, director=director, rating=rating)
-
+    return render_template('get_single_movie.html', title=title, director=director, rating=rating, movie_id=movie_id)
 
 @app.get('/movies/<int:movie_id>/edit')
 def get_edit_movies_page(movie_id: int):
