@@ -42,8 +42,19 @@ def create_movie():
 
 @app.get('/movies/search')
 def search_movies():
-    # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    # TODO: Feature 3 
+    movie_repository.create_movie("The Shawshank Redemption", "Frank Darabont", 1)
+    movie_repository.create_movie("The Godfather", "Francis Ford Coppola", 3)
+    movie_repository.create_movie("Pulp Fiction", "Quentin Tarantino", 5)
+
+    movie_title = request.args.get('movie-title')
+    
+    if movie_title is None:
+        return render_template('search_movies.html', search_active=True)
+
+    movie = movie_repository.get_movie_by_title(movie_title)
+
+    return render_template('search_movies.html', search_active=True, movie=movie)
 
 
 @app.get('/movies/<int:movie_id>')
