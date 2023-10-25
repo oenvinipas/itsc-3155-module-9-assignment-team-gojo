@@ -43,10 +43,6 @@ def create_movie():
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3 
-    movie_repository.create_movie("The Shawshank Redemption", "Frank Darabont", 1)
-    movie_repository.create_movie("The Godfather", "Francis Ford Coppola", 3)
-    movie_repository.create_movie("Pulp Fiction", "Quentin Tarantino", 5)
-
     movie_title = request.args.get('movie-title')
     
     if movie_title is None:
