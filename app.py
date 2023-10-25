@@ -42,8 +42,15 @@ def create_movie():
 
 @app.get('/movies/search')
 def search_movies():
-    # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    # TODO: Feature 3 
+    movie_title = request.args.get('movie-title')
+    
+    if movie_title is None:
+        return render_template('search_movies.html', search_active=True)
+
+    movie = movie_repository.get_movie_by_title(movie_title)
+
+    return render_template('search_movies.html', search_active=True, movie=movie)
 
 
 @app.get('/movies/<int:movie_id>')
@@ -69,4 +76,4 @@ def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
 
-#test
+#test3
