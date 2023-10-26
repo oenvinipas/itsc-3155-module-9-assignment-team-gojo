@@ -16,7 +16,8 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True, movie_repository=movie_repository)
+    movie = movie_repository.get_all_movies()
+    return render_template('list_all_movies.html', list_movies_active=True, movie_repository=movie_repository, movie=movie)
 
 
 @app.get('/movies/new')
@@ -75,5 +76,3 @@ def update_movie(movie_id: int):
 def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
-
-#test3
