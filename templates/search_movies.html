@@ -6,13 +6,13 @@
     <h1 class="mb-5">Search Movie Ratings</h1>
     <p class="mb-3">Search for a movie rating below</p>
     <!-- TODO: Feature 3 -->
-        <form action="/movies/search" method="GET">
-            <div class="mb-3">
-                <label for="movie-title">Movie Title:</label>
-                <input type="text" class="form-control" id="movie-title" name="movie-title" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+    <form action="/movies/search" method="GET">
+        <div class="mb-3">
+            <label for="movie-title">Movie Title:</label>
+            <input type="text" class="form-control" id="movie-title" name="movie-title" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
     {% if movie: %}
         <div class="container p-0">
             <h3 class="pt-2"> {{ movie.title }} </h3>
@@ -37,5 +37,7 @@
                 </div>
             </div>
         </div>
+        {% elif search_active and not movie: %}
+            <h3 class = "text-center text-danger strong">{{ error }}</h3>
     {% endif %}
 {% endblock %}

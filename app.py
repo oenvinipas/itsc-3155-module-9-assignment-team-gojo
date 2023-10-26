@@ -51,8 +51,7 @@ def search_movies():
         return render_template('search_movies.html', search_active=True)
 
     movie = movie_repository.get_movie_by_title(movie_title)
-
-    return render_template('search_movies.html', search_active=True, movie=movie)
+    return render_template('search_movies.html', search_active=True, movie=movie, error='There is no movie by that name')
 
 
 @app.get('/movies/<int:movie_id>')
