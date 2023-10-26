@@ -31,10 +31,11 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
-    movie_rating = int(movie_rating)
-    
+        
     if movie_title is None or movie_director is None or movie_rating is None:
-        abort(400)
+        abort(403)
+        
+    movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
     
@@ -57,8 +58,14 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    return render_template('get_single_movie.html')
-
+    movie = movie_repository.get_movie_by_id(int(movie_id)) #unit test this
+    if movie:
+        title = movie.title
+        director = movie.director
+        rating = movie.rating
+    else: 
+        abort (404)
+    return render_template('get_single_movie.html', title=title, director=director, rating=rating, movie_id=movie_id)
 
 @app.get('/movies/<int:movie_id>/edit')
 def get_edit_movies_page(movie_id: int):
@@ -76,5 +83,3 @@ def update_movie(movie_id: int):
 def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
-
-#test3
