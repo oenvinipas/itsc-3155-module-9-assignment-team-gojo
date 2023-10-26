@@ -31,10 +31,11 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
-    movie_rating = int(movie_rating)
-    
+
     if movie_title is None or movie_director is None or movie_rating is None:
-        abort(400)
+        abort(403)
+
+    movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
     
@@ -50,8 +51,7 @@ def search_movies():
         return render_template('search_movies.html', search_active=True)
 
     movie = movie_repository.get_movie_by_title(movie_title)
-
-    return render_template('search_movies.html', search_active=True, movie=movie)
+    return render_template('search_movies.html', search_active=True, movie=movie, error='There is no movie by that name')
 
 
 @app.get('/movies/<int:movie_id>')
