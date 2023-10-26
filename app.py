@@ -32,10 +32,11 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
-    movie_rating = int(movie_rating)
     
     if movie_title is None or movie_director is None or movie_rating is None:
         abort(400)
+        
+    movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
     
