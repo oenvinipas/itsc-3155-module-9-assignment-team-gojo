@@ -3,13 +3,25 @@
 {% block title %}Movie Rating App | All Movies{% endblock %}
 
 {% block body %}
-<h1 class="mb-5">All Movies</h1>
-<p class="mb-3">See our list of movie ratings below</p>
 <!-- TODO: Feature 1 -->
- <!-- {% for key, value in movie_repository.get_all_movies().items() %}
-    <p>{{ key }}</p>
-    <p>Title: {{ value.title }}</p>
-    <p>Director: {{ value.director }}</p>
-    <p>Rating: {{ value.rating }}</p>
- {% endfor %} -->
+{% if movie.items()|length > 0 %}
+<h1 class="mb-3">All Movies</h1>
+<h5 class="mb-2">See Our List of Movie Ratings Below</h5>
+<div class="row">
+    {% for movie_id, movie_info in movie.items() %}
+    <div class="col-10 col-md-3 mb-4">
+        <div class="card">
+            <div class="card-body text-center" style="width: 18rem;">
+                <h4 class="card-title">{{ movie_info.title }}</h4>
+                <p class="card-text"><strong>Movie Director:</strong> {{ movie_info.director }}</p>
+                <p class="card-text"><strong>Movie Rating:</strong> {{ movie_info.rating }}</p>
+                <a href="/movies/{{ movie_id }}" class="btn btn-info">View Rating Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<h1>There Are No Movies To Display!</h1>
+{% endif %}
 {% endblock %}
