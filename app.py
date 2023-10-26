@@ -3,7 +3,6 @@ from flask import Flask, redirect, render_template, abort, request
 from src.repositories.movie_repository import get_movie_repository
 
 app = Flask(__name__)
-app.debug = True
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
@@ -35,10 +34,7 @@ def create_movie():
     movie_title = request.form.get("movie-title")
     movie_director = request.form.get("movie-director")
     movie_rating = request.form.get("movie-rating")
-    print(type(movie_title))
-    print(type(movie_director))
-    print(type(movie_rating))
-    
+        
     if movie_title is None or movie_director is None or movie_rating is None:
         abort(403)
     
@@ -109,5 +105,3 @@ def update_movie(movie_id: int):
 def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
-
-# test 
