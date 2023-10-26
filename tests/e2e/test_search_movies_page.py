@@ -15,10 +15,11 @@ def test_search_movie_rating_page(test_app):
     response = test_app.get('/movies/search', query_string={
         'movie-title': "Jurassic Park",
         "movie-director": "Steven Spielberg",
-        "movie-rating": "4"
+        "movie-rating": "5"
     }, follow_redirects=True)
     
     data = response.data.decode("utf-8")
+    print(data)
 
     assert '<h3 class="pt-2"> Jurassic Park </h3>' in data
     assert '<p> Author: Steven Spielberg </p>' in data
