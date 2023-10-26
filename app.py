@@ -41,7 +41,8 @@ def create_movie():
     movie_rating = int(movie_rating)
     
     movie_repository.create_movie(movie_title, movie_director, movie_rating)
-    
+    print(movie_repository.get_movie_by_title(movie_title).movie_id)
+
     return redirect('/movies')
 
 
