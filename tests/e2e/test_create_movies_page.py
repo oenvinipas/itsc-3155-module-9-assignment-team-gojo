@@ -25,5 +25,4 @@ def test_create_movie_rating(test_app):
     
 def test_create_movie_rating_validation_error(test_app):
     response = test_app.post('/movies', follow_redirects=True)
-    
     assert response.status_code == 403
